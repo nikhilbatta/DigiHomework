@@ -7,9 +7,10 @@ function Homepage(){
             let cell = []
             for (var i = 0; i < 5; i ++){
                 let cellID = `cell${i}`
-                cell.push(<td key={cellID} id={cellID}>Test Data</td>)
+                cell.push(<div><td key={cellID} id={cellID}>Test Data</td>
+                    <td>Hey</td></div>)
             }
-            rows.push(<tr key={i} id={rowID}>{cell} OK</tr>)
+            rows.push(<tr key={i} id={rowID}>{cell}</tr>)
         }
     
     return (
