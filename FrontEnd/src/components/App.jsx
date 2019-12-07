@@ -1,9 +1,11 @@
 import React from 'react';
-import Homepage from './Homepage'
+import Login from './Login'
+import Homepage from './Homepage';
 
 function App(){
     return (
         <div>
+            <Login/>
             <Homepage/>
         </div>
     )
