@@ -2,18 +2,38 @@ import React from 'react'
 
 function Homepage(){
     const token = localStorage.getItem('user')
-    console.log(token.slice(1))
-    console.log(token.slice(0, token.length - 1))
+    var noQuotesToken = token.replace(/[""]+/g, '');
     const requestOptions = {
         method: "GET",
-        headers: { 'Content-Type': 'application/json',  'Accept': 'application/json',  'Authorization': `Bearer ${localStorage.getItem('user')}`},
+        headers: { 'Content-Type': 'application/json',  'Accept': 'application/json',  'Authorization': `Bearer ${noQuotesToken}`},
+    }
+    async function fetchMyApi(){
+        let response = await fetch('http://localhost:4000/api/teacher', requestOptions)
+        response = await response.json();
+        console.log(response);
     }
     React.useEffect(() => {
-        return fetch('http://localhost:4000/api/teacher', requestOptions)
-        .then(data => {
-            console.log(data);
-        })
-    })
+       fetchMyApi();
+    }, [])
+    // I needed this function because I wasnt using useEffect properly with async function but now I am so I can maybe delete this.
+    function handleResponse(response) {
+        return response.text().then(text => {
+            const data = text && JSON.parse(text);
+            if (!response.ok) {
+                if (response.status === 401) {
+                    // auto logout if 401 response returned from api
+                    logout();
+                    location.reload(true);
+                }
+    
+                const error = (data && data.message) || response.statusText;
+                return Promise.reject(error);
+            }
+            console.log(response)
+            return data;
+           
+        });
+    }
         let rows = []
         for(var i = 0; i < 5 ; i++){
             let rowID = `row${i}`

@@ -1,0 +1,14 @@
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/Release/netcoreapp2.2/BackEnd.deps.json
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/Release/netcoreapp2.2/BackEnd.runtimeconfig.json
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/Release/netcoreapp2.2/BackEnd.runtimeconfig.dev.json
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/Release/netcoreapp2.2/BackEnd.dll
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/Release/netcoreapp2.2/BackEnd.pdb
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.csprojAssemblyReference.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.csproj.CoreCompileInputs.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.RazorAssemblyInfo.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.RazorAssemblyInfo.cs
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.AssemblyInfoInputs.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.AssemblyInfo.cs
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.RazorTargetAssemblyInfo.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.dll
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/Release/netcoreapp2.2/BackEnd.pdb

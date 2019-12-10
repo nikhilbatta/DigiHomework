@@ -39,7 +39,7 @@ namespace BackEnd.Controllers
           var identity = (ClaimsIdentity)User.Identity;
           var foundId = identity.FindFirst(ClaimTypes.Name).Value;
           Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
-          Period foundPeriod = _db.Periods.FirstOrDefault(p => p.TeacherID == foundTeacher.TeacherID);
+          Period foundPeriod = _db.Periods.Include(p => p.Students).FirstOrDefault(p => p.TeacherID == foundTeacher.TeacherID);
           return foundPeriod;
       }
       [Authorize]
