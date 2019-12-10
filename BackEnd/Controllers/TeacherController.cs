@@ -15,7 +15,7 @@ namespace BackEnd.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
-        private readonly IUserService _userService;
+      private readonly IUserService _userService;
       private readonly BackEndContext _db;
       public TeacherController(BackEndContext db, IUserService userService)
       {
@@ -30,6 +30,28 @@ namespace BackEnd.Controllers
           Console.WriteLine(userparam.Password);
           var user = _userService.Authenticate(userparam.Username, userparam.Password);
           return Ok(user);
+      }
+      [Authorize]
+      [HttpGet]
+      public ActionResult <Period> Get()
+      {
+          // will use claims identity here to find the periods for that specific teacher.
+          var identity = (ClaimsIdentity)User.Identity;
+          var foundId = identity.FindFirst(ClaimTypes.Name).Value;
+          Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
+          Period foundPeriod = _db.Periods.FirstOrDefault(p => p.TeacherID == foundTeacher.TeacherID);
+          return foundPeriod;
+      }
+      [Authorize]
+      [HttpGet("homework")]
+      public ActionResult <PeriodHomework> GetAllHomeWorks()
+      {
+          var identity = (ClaimsIdentity)User.Identity;
+          var foundId = identity.FindFirst(ClaimTypes.Name).Value;
+          Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
+          Period foundPeriod = _db.Periods.FirstOrDefault(p => p.TeacherID == foundTeacher.TeacherID);
+          PeriodHomework foundHomework = _db.PeriodHomeworks.FirstOrDefault(ph => ph.PeriodID == foundPeriod.PeriodID);
+          return foundHomework;
       }
     }
 }
