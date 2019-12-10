@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using BackEnd;
 
 namespace BackEnd.Controllers
 {
@@ -14,16 +15,21 @@ namespace BackEnd.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
+        private readonly IUserService _userService;
       private readonly BackEndContext _db;
-      public TeacherController(BackEndContext db)
+      public TeacherController(BackEndContext db, IUserService userService)
       {
+          _userService = userService;
           _db = db;
       }
-      [HttpGet]
-      public ActionResult <IEnumerable<Teacher>> Get()
+      [HttpPost]
+      public ActionResult <IEnumerable<Period>> Get([FromBody] User userparam)
       {
-          var teachers = _db.Teachers.ToList();
-          return teachers;
+          // will use claims identity here to find the periods for that specific teacher.
+          Console.WriteLine(userparam.Username);
+          Console.WriteLine(userparam.Password);
+          var user = _userService.Authenticate(userparam.Username, userparam.Password);
+          return Ok(user);
       }
     }
 }
