@@ -23,7 +23,7 @@ namespace BackEnd.Controllers
           _db = db;
       }
       [HttpPost]
-      public ActionResult <IEnumerable<Period>> Get([FromBody] User userparam)
+      public ActionResult <IEnumerable<Period>> Post([FromBody] User userparam)
       {
           // will use claims identity here to find the periods for that specific teacher.
           Console.WriteLine(userparam.Username);
@@ -44,13 +44,13 @@ namespace BackEnd.Controllers
       }
       [Authorize]
       [HttpGet("homework")]
-      public ActionResult <PeriodHomework> GetAllHomeWorks()
+      public ActionResult <IEnumerable<PeriodHomework>> GetAllHomeWorks()
       {
           var identity = (ClaimsIdentity)User.Identity;
           var foundId = identity.FindFirst(ClaimTypes.Name).Value;
           Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
           Period foundPeriod = _db.Periods.FirstOrDefault(p => p.TeacherID == foundTeacher.TeacherID);
-          PeriodHomework foundHomework = _db.PeriodHomeworks.FirstOrDefault(ph => ph.PeriodID == foundPeriod.PeriodID);
+          List<PeriodHomework>  foundHomework = _db.PeriodHomeworks.Where(ph => ph.PeriodID == foundPeriod.PeriodID).ToList();
           return foundHomework;
       }
     }
