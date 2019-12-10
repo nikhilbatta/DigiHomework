@@ -1,6 +1,19 @@
 import React from 'react'
 
 function Homepage(){
+    const token = localStorage.getItem('user')
+    console.log(token.slice(1))
+    console.log(token.slice(0, token.length - 1))
+    const requestOptions = {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json',  'Accept': 'application/json',  'Authorization': `Bearer ${localStorage.getItem('user')}`},
+    }
+    React.useEffect(() => {
+        return fetch('http://localhost:4000/api/teacher', requestOptions)
+        .then(data => {
+            console.log(data);
+        })
+    })
         let rows = []
         for(var i = 0; i < 5 ; i++){
             let rowID = `row${i}`
