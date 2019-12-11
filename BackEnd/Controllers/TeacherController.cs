@@ -33,14 +33,14 @@ namespace BackEnd.Controllers
       }
       [Authorize]
       [HttpGet]
-      public ActionResult <Period> Get()
+      public ActionResult <IEnumerable<Period>> Get()
       {
           // will use claims identity here to find the periods for that specific teacher.
           var identity = (ClaimsIdentity)User.Identity;
           var foundId = identity.FindFirst(ClaimTypes.Name).Value;
           Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
-          Period foundPeriod = _db.Periods.Include(p => p.Students).FirstOrDefault(p => p.TeacherID == foundTeacher.TeacherID);
-          return foundPeriod;
+          List <Period> foundPeriods = _db.Periods.Include(p => p.Students).Where(p => p.TeacherID == foundTeacher.TeacherID).ToList();
+          return foundPeriods;
       }
       [Authorize]
       [HttpGet("homework")]
