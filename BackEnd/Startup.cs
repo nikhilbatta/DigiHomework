@@ -79,6 +79,7 @@ namespace BackEnd
             // }
 
             // app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

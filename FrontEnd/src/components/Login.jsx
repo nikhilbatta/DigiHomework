@@ -1,4 +1,5 @@
 import React, {useRef} from 'react'
+import getBaseUrl from './apiHelper'
 
 function Login(){
     var username = useRef("");
@@ -14,7 +15,7 @@ function Login(){
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({Username, Password})
         };
-        return fetch("http://localhost:4000/api/teacher", requestOptions)
+        return fetch(getBaseUrl() + "api/teacher", requestOptions)
         .then(handleResponse)
         .then(user => {
             console.log(user);

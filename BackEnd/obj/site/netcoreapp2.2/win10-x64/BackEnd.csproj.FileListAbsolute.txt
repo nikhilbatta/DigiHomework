@@ -1,0 +1,17 @@
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/site/netcoreapp2.2/win10-x64/hostpolicy.dll
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/site/netcoreapp2.2/win10-x64/hostfxr.dll
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/site/netcoreapp2.2/win10-x64/BackEnd.exe
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/site/netcoreapp2.2/win10-x64/BackEnd.deps.json
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/site/netcoreapp2.2/win10-x64/BackEnd.runtimeconfig.json
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/site/netcoreapp2.2/win10-x64/BackEnd.runtimeconfig.dev.json
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/site/netcoreapp2.2/win10-x64/BackEnd.dll
+/Users/Guest/Desktop/DigiHomework/BackEnd/bin/site/netcoreapp2.2/win10-x64/BackEnd.pdb
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.csprojAssemblyReference.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.csproj.CoreCompileInputs.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.RazorAssemblyInfo.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.RazorAssemblyInfo.cs
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.AssemblyInfoInputs.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.AssemblyInfo.cs
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.RazorTargetAssemblyInfo.cache
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.dll
+/Users/Guest/Desktop/DigiHomework/BackEnd/obj/site/netcoreapp2.2/win10-x64/BackEnd.pdb

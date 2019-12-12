@@ -17,7 +17,6 @@ namespace BackEnd
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:4000")
                 .Build();
     }
 }

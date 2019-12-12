@@ -1,4 +1,5 @@
 import React from 'react'
+import getBaseUrl from './apiHelper'
 
 function Homepage(){
     const token = localStorage.getItem('user')
@@ -8,13 +9,14 @@ function Homepage(){
         headers: { 'Content-Type': 'application/json',  'Accept': 'application/json',  'Authorization': `Bearer ${noQuotesToken}`},
     }
     async function fetchMyApi(){
-        let response = await fetch('http://localhost:4000/api/teacher', requestOptions)
+        let response = await fetch(getBaseUrl + "api/teacher", requestOptions)
         response = await response.json();
         console.log(response);
     }
     React.useEffect(() => {
        fetchMyApi();
     }, [])
+  
     // I needed this function because I wasnt using useEffect properly with async function but now I am so I can maybe delete this.
     function handleResponse(response) {
         return response.text().then(text => {
