@@ -53,5 +53,15 @@ namespace BackEnd.Controllers
           List<PeriodHomework>  foundHomework = _db.PeriodHomeworks.Where(ph => ph.PeriodID == foundPeriod.PeriodID).ToList();
           return foundHomework;
       }
+      [Authorize]
+      [HttpPost("create")]
+      public void Post([FromBody] PeriodHomework newHomework) 
+      {
+          var identity = (ClaimsIdentity)User.Identity;
+          var foundId = identity.FindFirst(ClaimTypes.Name).Value;
+          Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
+          Console.WriteLine(newHomework);
+        //   _db.PeriodHomework.add(newHomework);
+      }
     }
 }
