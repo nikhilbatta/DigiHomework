@@ -37,6 +37,9 @@ namespace BackEnd
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
+            var awsSection = Configuration.GetSection("AWS");
+            services.Configure<AppSettings>(awsSection);
+            var getCred = awsSection.Get<AppSettings>();
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>

@@ -10,6 +10,8 @@ using System.Security.Claims;
 using BackEnd;
 using Twilio; 
 using Twilio.Rest.Api.V2010.Account;
+using Amazon;
+using Amazon.S3; 
 
 namespace BackEnd.Controllers
 {
@@ -17,10 +19,12 @@ namespace BackEnd.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
+      IAmazonS3 _S3Client {get;set;}
       private readonly IUserService _userService;
       private readonly BackEndContext _db;
-      public TeacherController(BackEndContext db, IUserService userService)
+      public TeacherController(BackEndContext db, IUserService userService, IAmazonS3 s3Client)
       {
+          _S3Client = s3Client;
           _userService = userService;
           _db = db;
       }
