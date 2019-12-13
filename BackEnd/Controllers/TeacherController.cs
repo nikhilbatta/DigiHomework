@@ -12,6 +12,7 @@ using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Amazon;
 using Amazon.S3; 
+using Amazon.S3.Model;
 
 namespace BackEnd.Controllers
 {
@@ -90,6 +91,13 @@ namespace BackEnd.Controllers
       public void TestingAws()
       {
           var client = new AmazonS3Client(Amazon.RegionEndpoint.USWest2);
+          var putRequest = new PutObjectRequest 
+          {
+              BucketName = "testerbuckettt", 
+              Key = "testerrrr",
+              ContentBody = "sampletext"
+          };
+          client.PutObjectAsync(putRequest);
           Console.WriteLine(client);
       }
     }
