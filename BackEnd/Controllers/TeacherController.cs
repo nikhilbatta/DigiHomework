@@ -91,7 +91,7 @@ namespace BackEnd.Controllers
       [HttpPost("testingaws")]
       public void TestingAws()
       {
-          var client = new AmazonS3Client("AKIAJGVZGIU3DIUQWDMA","aHRtY64DSrIz19gol6rC8FAzXJvq7HqP27lZo1Cg",Amazon.RegionEndpoint.USWest2);
+          var client = new AmazonS3Client("","",Amazon.RegionEndpoint.USWest2);
           var fileTransfer = new TransferUtility(client);
           fileTransfer.UploadAsync("/Users/Guest/Downloads/example.jpeg", "testerbuckettt");
           Console.WriteLine(fileTransfer);
