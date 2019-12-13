@@ -86,6 +86,11 @@ namespace BackEnd.Controllers
           );
           Console.WriteLine(message.Sid);
       }
-      
+      [HttpPost("testingaws")]
+      public void TestingAws()
+      {
+          var client = new AmazonS3Client(Amazon.RegionEndpoint.USWest2);
+          Console.WriteLine(client);
+      }
     }
 }

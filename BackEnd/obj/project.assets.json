@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "AWSSDK.Core/3.3.104": {
+      "AWSSDK.Core/3.3.104.4": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/AWSSDK.Core.dll": {}
@@ -5618,7 +5618,7 @@
       }
     },
     ".NETCoreApp,Version=v2.2/win10-x64": {
-      "AWSSDK.Core/3.3.104": {
+      "AWSSDK.Core/3.3.104.4": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/AWSSDK.Core.dll": {}
@@ -11164,15 +11164,15 @@
     }
   },
   "libraries": {
-    "AWSSDK.Core/3.3.104": {
-      "sha512": "1ldqyzqh18tKTFuseBX3YetZk/flCE3fRVOBAUFpJJrt0xqHjMBxMwpMLrnrYaDubHj7f9EPU0TlGgMef1YUSA==",
+    "AWSSDK.Core/3.3.104.4": {
+      "sha512": "KAJOA3HiMc81WvIiYg/h3CfF2F1C7iWNK0VwMfuKbTmJtR4+B68m5PCXCzClSjEWljpl895o7DR9bGfioP/hGw==",
       "type": "package",
-      "path": "awssdk.core/3.3.104",
+      "path": "awssdk.core/3.3.104.4",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "awssdk.core.3.3.104.nupkg.sha512",
+        "awssdk.core.3.3.104.4.nupkg.sha512",
         "awssdk.core.nuspec",
         "lib/MonoAndroid10/AWSSDK.Core.XML",
         "lib/MonoAndroid10/AWSSDK.Core.dll",
@@ -20464,6 +20464,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "AWSSDK.Core >= 3.3.104.4",
       "AWSSDK.Extensions.NETCore.Setup >= 3.3.100.1",
       "AWSSDK.S3 >= 3.3.109",
       "Microsoft.AspNetCore.All >= 2.2.0",
@@ -20516,6 +20517,10 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
+          "AWSSDK.Core": {
+            "target": "Package",
+            "version": "[3.3.104.4, )"
+          },
           "AWSSDK.Extensions.NETCore.Setup": {
             "target": "Package",
             "version": "[3.3.100.1, )"

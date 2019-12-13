@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "d736931a921bcb55f7478121f474c9c8be0cac8a"
+    "signature": "99753d386e9b59dd2274dce481eb5e578d1717af"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v2.2": {
       "BackEnd/1.0.0": {
         "dependencies": {
+          "AWSSDK.Core": "3.3.104.4",
           "AWSSDK.Extensions.NETCore.Setup": "3.3.100.1",
           "AWSSDK.S3": "3.3.109",
           "Microsoft.AspNetCore.All": "2.2.0",
@@ -43,11 +44,11 @@
           "BackEnd.dll": {}
         }
       },
-      "AWSSDK.Core/3.3.104": {
+      "AWSSDK.Core/3.3.104.4": {
         "runtime": {
           "lib/netstandard2.0/AWSSDK.Core.dll": {
             "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.3.104.0"
+            "fileVersion": "3.3.104.4"
           }
         },
         "compile": {
@@ -56,7 +57,7 @@
       },
       "AWSSDK.Extensions.NETCore.Setup/3.3.100.1": {
         "dependencies": {
-          "AWSSDK.Core": "3.3.104",
+          "AWSSDK.Core": "3.3.104.4",
           "Microsoft.Extensions.Configuration.Abstractions": "2.2.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
           "Microsoft.Extensions.Logging.Abstractions": "2.2.0"
@@ -73,7 +74,7 @@
       },
       "AWSSDK.S3/3.3.109": {
         "dependencies": {
-          "AWSSDK.Core": "3.3.104"
+          "AWSSDK.Core": "3.3.104.4"
         },
         "runtime": {
           "lib/netstandard2.0/AWSSDK.S3.dll": {
@@ -4073,12 +4074,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AWSSDK.Core/3.3.104": {
+    "AWSSDK.Core/3.3.104.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1ldqyzqh18tKTFuseBX3YetZk/flCE3fRVOBAUFpJJrt0xqHjMBxMwpMLrnrYaDubHj7f9EPU0TlGgMef1YUSA==",
-      "path": "awssdk.core/3.3.104",
-      "hashPath": "awssdk.core.3.3.104.nupkg.sha512"
+      "sha512": "sha512-KAJOA3HiMc81WvIiYg/h3CfF2F1C7iWNK0VwMfuKbTmJtR4+B68m5PCXCzClSjEWljpl895o7DR9bGfioP/hGw==",
+      "path": "awssdk.core/3.3.104.4",
+      "hashPath": "awssdk.core.3.3.104.4.nupkg.sha512"
     },
     "AWSSDK.Extensions.NETCore.Setup/3.3.100.1": {
       "type": "package",
