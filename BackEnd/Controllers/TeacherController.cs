@@ -13,6 +13,7 @@ using Twilio.Rest.Api.V2010.Account;
 using Amazon;
 using Amazon.S3; 
 using Amazon.S3.Model;
+using Amazon.S3.Transfer;
 
 namespace BackEnd.Controllers
 {
@@ -91,6 +92,9 @@ namespace BackEnd.Controllers
       public void TestingAws()
       {
           var client = new AmazonS3Client(Amazon.RegionEndpoint.USWest2);
+          var fileTransfer = new TransferUtility(client);
+          fileTransfer.UploadAsync("/Users/Guest/Downloads/example.jpeg", "testerbuckettt");
+          Console.WriteLine(fileTransfer);
           var putRequest = new PutObjectRequest 
           {
               BucketName = "testerbuckettt", 
