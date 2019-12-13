@@ -5586,6 +5586,21 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Twilio/5.37.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.3.0",
+          "Newtonsoft.Json": "11.0.2",
+          "System.Collections.Specialized": "4.3.0",
+          "System.IdentityModel.Tokens.Jwt": "5.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Twilio.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Twilio.dll": {}
+        }
+      },
       "WindowsAzure.Storage/8.1.4": {
         "type": "package",
         "dependencies": {
@@ -11114,6 +11129,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
+        }
+      },
+      "Twilio/5.37.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.3.0",
+          "Newtonsoft.Json": "11.0.2",
+          "System.Collections.Specialized": "4.3.0",
+          "System.IdentityModel.Tokens.Jwt": "5.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Twilio.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Twilio.dll": {}
         }
       },
       "WindowsAzure.Storage/8.1.4": {
@@ -20388,6 +20418,25 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "Twilio/5.37.0": {
+      "sha512": "bkXxLO6usORUTJf1j2AMSTv2cW/IgoWKWa9jMbsFbxN3GQ8gJsrK4j39GVhbO14A1+K+riSLL0+RRnvCCZpLdQ==",
+      "type": "package",
+      "path": "twilio/5.37.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Twilio.dll",
+        "lib/net35/Twilio.xml",
+        "lib/net451/Twilio.dll",
+        "lib/net451/Twilio.xml",
+        "lib/netstandard1.4/Twilio.dll",
+        "lib/netstandard1.4/Twilio.xml",
+        "lib/netstandard2.0/Twilio.dll",
+        "lib/netstandard2.0/Twilio.xml",
+        "twilio.5.37.0.nupkg.sha512",
+        "twilio.nuspec"
+      ]
+    },
     "WindowsAzure.Storage/8.1.4": {
       "sha512": "W6ZZ0/o7+3Qb77mRAQyLjPudHG3OMeeQ4p9yY13PUdJArmRCx2cLMm5F4tpIjJXxzHC0ew0oK7DMDGILMdfCnw==",
       "type": "package",
@@ -20424,7 +20473,8 @@
       "Microsoft.AspNetCore.Server.Kestrel >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "MySqlConnector >= 0.60.2",
-      "Pomelo.EntityFrameworkCore.MySql >= 2.2.6"
+      "Pomelo.EntityFrameworkCore.MySql >= 2.2.6",
+      "Twilio >= 5.37.0"
     ]
   },
   "packageFolders": {
@@ -20508,6 +20558,10 @@
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[2.2.6, )"
+          },
+          "Twilio": {
+            "target": "Package",
+            "version": "[5.37.0, )"
           }
         },
         "imports": [

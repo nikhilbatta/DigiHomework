@@ -8,6 +8,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using BackEnd;
+using Twilio; 
+using Twilio.Rest.Api.V2010.Account;
 
 namespace BackEnd.Controllers
 {
@@ -62,6 +64,23 @@ namespace BackEnd.Controllers
           Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
           Console.WriteLine(newHomework);
         //   _db.PeriodHomework.add(newHomework);
+      }
+     [HttpPost("sender")]
+      public void Send()
+      {
+          const string accountSid = "";
+          const string authToken = "";
+          TwilioClient.Init(accountSid, authToken);
+          var mediaUrl = new [] {
+              new Uri("https://m.media-amazon.com/images/M/MV5BMzRjYjcyZTItNTA1Mi00YTVkLWE2Y2MtMmRlMzllODkyYzQ2XkEyXkFqcGdeQXVyNjg4NzAyOTA@._V1_UX182_CR0,0,182,268_AL_.jpg")
+          }.ToList();
+          var message = MessageResource.Create(
+              body: "Check if you can click that link and see that image.",
+              from: new Twilio.Types.PhoneNumber("+15025144572"),
+              mediaUrl: mediaUrl,
+              to: new Twilio.Types.PhoneNumber("+19714207970")
+          );
+          Console.WriteLine(message.Sid);
       }
     }
 }
