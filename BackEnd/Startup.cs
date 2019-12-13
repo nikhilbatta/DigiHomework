@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using BackEnd.Models;
 using BackEnd.Helpers;
 using BackEnd.Services;
-
+using System;
+using Amazon; 
+using Amazon.S3;
 
 namespace BackEnd
 {
@@ -57,6 +59,11 @@ namespace BackEnd
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            var options = Configuration.GetAWSOptions();
+            IAmazonS3 client = options.CreateServiceClient<IAmazonS3>();
+             Console.WriteLine(client);
+             services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+             services.AddAWSService<IAmazonS3>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,8 +86,10 @@ namespace BackEnd
             // }
 
             // app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseMvc();
+            
+            
+             app.UseStaticFiles();
+             app.UseMvc();
         }
     }
 }
