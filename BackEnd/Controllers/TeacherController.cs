@@ -91,11 +91,10 @@ namespace BackEnd.Controllers
       [HttpPost("testingaws")]
       public void TestingAws()
       {
-          var client = new AmazonS3Client("","",Amazon.RegionEndpoint.USWest2);
+          var client = new AmazonS3Client("","", Amazon.RegionEndpoint.USWest2);
           var fileTransfer = new TransferUtility(client);
-          fileTransfer.UploadAsync("/Users/Guest/Downloads/example.jpeg", "testerbuckettt");
+          fileTransfer.UploadAsync("/Users/Guest/Downloads/asdf.jpeg", "testerbuckettt");
           Console.WriteLine(fileTransfer);
-          byte[] ok = 
         //   var putRequest = new PutObjectRequest 
         //   {
         //       BucketName = "testerbuckettt", 
