@@ -95,6 +95,7 @@ namespace BackEnd.Controllers
           var fileTransfer = new TransferUtility(client);
           fileTransfer.UploadAsync("/Users/Guest/Downloads/example.jpeg", "testerbuckettt");
           Console.WriteLine(fileTransfer);
+          byte[] ok = 
         //   var putRequest = new PutObjectRequest 
         //   {
         //       BucketName = "testerbuckettt", 
