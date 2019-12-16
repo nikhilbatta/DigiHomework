@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace BackEnd.Models
 {
@@ -11,6 +14,8 @@ namespace BackEnd.Models
         public string AssignedDate{get;set;}
         public string DueDate{get;set;}
         public string ImageId{get;set;}
+        [NotMapped]
+         public IFormFile HWImage {get;set;}
     }
 
 }
