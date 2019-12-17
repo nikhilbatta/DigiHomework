@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Net.Http;
 using System.Net;
+using System.Threading.Tasks;
+using System.Text;
 
 namespace BackEnd.Controllers
 {
@@ -58,12 +60,9 @@ namespace BackEnd.Controllers
         [HttpGet("period/{id}")]
         // pass period id in the url, only return homework for that specific period.
         // return other information about the period like name subject teachername, etc.
-        public ActionResult<IEnumerable<PeriodHomework>> GetAllHomeWorks()
+        public ActionResult<IEnumerable<PeriodHomework>> GetAllHomeWorks(int id)
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            var foundId = identity.FindFirst(ClaimTypes.Name).Value;
-            Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
-            Period foundPeriod = _db.Periods.FirstOrDefault(p => p.TeacherID == foundTeacher.TeacherID);
+            Period foundPeriod = _db.Periods.FirstOrDefault(p => p.PeriodID == id);
             List<PeriodHomework> foundHomework = _db.PeriodHomeworks.Where(ph => ph.PeriodID == foundPeriod.PeriodID).ToList();
             return foundHomework;
         }
@@ -77,42 +76,43 @@ namespace BackEnd.Controllers
             hw.PeriodID = id;
             _db.PeriodHomeworks.Add(hw);
             _db.SaveChanges();
-            SaveFileToAWS("HOMEWORK-" + hw.PeriodHomeworkID, hw.HWImage);
+            SaveFileToAWS("HOMEWORK-" + hw.PeriodHomeworkID + ".jpeg", hw.HWImage);
         }
         [HttpGet("period/homework/{id}/image")]
-        public HttpResponseMessage GetHwImage(int id)
-        {
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new ByteArrayContent(GetFileFromAWS("HOMEWORK-" + id).ToArray());
-            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
-            Console.WriteLine("returning tati");
-            return response;
-        }
-        private MemoryStream GetFileFromAWS(string fileid)
+        public async Task GetObjectFromS3Async(int id)
         {
             var client = new AmazonS3Client("", "", Amazon.RegionEndpoint.USWest2);
-            var fileTransfer = new TransferUtility(client);
-           GetObjectRequest request = new GetObjectRequest
-        {
-            BucketName = "testerbuckettt",
-            Key = fileid
-        };
-        
-            var task = client.GetObjectAsync(request);
-            task.Wait();
-            MemoryStream memoryStream = new MemoryStream();
-
-            using (Stream responseStream = task.Result.ResponseStream)
+            string keyName = "HOMEWORK-" + id + ".jpeg";
+            var request = new GetObjectRequest 
             {
-                responseStream.CopyTo(memoryStream);
-            }
-            Console.WriteLine("return memeory");
-            return memoryStream;
+                BucketName = "testerbuckettt",
+                Key = keyName
+            };
+            string responseBody;
 
+            using (var response = await client.GetObjectAsync(request))
+            using (var responseStream = response.ResponseStream)
+            using (var reader = new StreamReader(responseStream))
+            {
+                var title = response.Metadata["x-amz"];
+                var contentType = response.Headers["Content-Type"];
+                Console.WriteLine($"Object meta, {title}");
+                 responseBody = reader.ReadToEnd();
+            // Console.WriteLine(responseBody);
+            };
+            var pathAndFileName = $"/Users/Guest/Desktop/{keyName}";
+            var createText = responseBody;
+
+            System.IO.File.WriteAllText(pathAndFileName, createText);
+            WebClient myWebber = new WebClient();
+            byte[] myDataBuffer = myWebber.DownloadData("https://testerbuckettt.s3-us-west-2.amazonaws.com/HOMEWORK-3.jpeg");
+            string download = Encoding.ASCII.GetString(myDataBuffer);
+            Console.WriteLine(download);
+           
         }
-        private void SaveFileToAWS(string fileID, IFormFile file)
+         private void SaveFileToAWS(string fileID, IFormFile file)
         {
-            var client = new AmazonS3Client("AKIAIRBJILX3OKHCMNMQ", "t+WgTzSfXxKdKRXnF/4MjevQ/EYtlg5Ss7K+SBwe", Amazon.RegionEndpoint.USWest2);
+            var client = new AmazonS3Client("", "", Amazon.RegionEndpoint.USWest2);
             var fileTransfer = new TransferUtility(client);
             var stream = new MemoryStream();
             file.CopyTo(stream);
@@ -134,31 +134,62 @@ namespace BackEnd.Controllers
             const string authToken = "";
             TwilioClient.Init(accountSid, authToken);
             var mediaUrl = new[] {
-              new Uri("https://m.media-amazon.com/images/M/MV5BMzRjYjcyZTItNTA1Mi00YTVkLWE2Y2MtMmRlMzllODkyYzQ2XkEyXkFqcGdeQXVyNjg4NzAyOTA@._V1_UX182_CR0,0,182,268_AL_.jpg")
+              new Uri("https://testerbuckettt.s3-us-west-2.amazonaws.com/HOMEWORK-3.jpeg")
           }.ToList();
             var message = MessageResource.Create(
                 body: "Check if you can click that link and see that image.",
                 from: new Twilio.Types.PhoneNumber("+15025144572"),
                 mediaUrl: mediaUrl,
-                to: new Twilio.Types.PhoneNumber("+19714207970")
+                to: new Twilio.Types.PhoneNumber("+13609999430")
             );
             Console.WriteLine(message.Sid);
         }
-        [HttpPost("testingaws")]
-        public void TestingAws()
-        {
-            var client = new AmazonS3Client("", "", Amazon.RegionEndpoint.USWest2);
-            var fileTransfer = new TransferUtility(client);
-            fileTransfer.UploadAsync("/Users/Guest/Downloads/asdf.jpeg", "testerbuckettt");
-            Console.WriteLine(fileTransfer);
-            //   var putRequest = new PutObjectRequest 
-            //   {
-            //       BucketName = "testerbuckettt", 
-            //       Key = "testerrrr",
-            //       ContentBody = "sampletext"
-            //   };
-            //   client.PutObjectAsync(putRequest);
-            //   Console.WriteLine(client);
-        }
+        // public HttpResponseMessage GetHwImage(int id)
+        // {
+        //     HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+        //     response.Content = new ByteArrayContent(GetFileFromAWS("HOMEWORK-" + id).ToArray());
+        //     response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
+        //     Console.WriteLine("returning tati");
+        //     return response;
+        // }
+        // private MemoryStream GetFileFromAWS(string fileid)
+        // {
+        //     var client = new AmazonS3Client("", "", Amazon.RegionEndpoint.USWest2);
+        //     var fileTransfer = new TransferUtility(client);
+        //    GetObjectRequest request = new GetObjectRequest
+        // {
+        //     BucketName = "testerbuckettt",
+        //     Key = fileid
+        // };
+        
+        //     Task tasker = client.GetObjectAsync(request);
+        //     tasker.Wait();
+        //     MemoryStream memoryStream = new MemoryStream();
+
+        //     using (Stream responseStream = tasker.ResponseStream)
+        //     {
+        //         responseStream.CopyTo(memoryStream);
+        //     }
+        //     Console.WriteLine("return memeory");
+        //     return memoryStream;
+
+        // }
+       
+        // [HttpPost("testingaws")]
+        // public void TestingAws()
+        // {
+        //     var client = new AmazonS3Client("", "", Amazon.RegionEndpoint.USWest2);
+        //     var fileTransfer = new TransferUtility(client);
+        //     fileTransfer.UploadAsync("/Users/Guest/Downloads/asdf.jpeg", "testerbuckettt");
+        //     Console.WriteLine(fileTransfer);
+        //     //   var putRequest = new PutObjectRequest 
+        //     //   {
+        //     //       BucketName = "testerbuckettt", 
+        //     //       Key = "testerrrr",
+        //     //       ContentBody = "sampletext"
+        //     //   };
+        //     //   client.PutObjectAsync(putRequest);
+        //     //   Console.WriteLine(client);
+        // }
     }
 }

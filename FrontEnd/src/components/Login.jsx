@@ -15,7 +15,7 @@ function Login(){
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({Username, Password})
         };
-        return fetch(getBaseUrl() + "api/teacher", requestOptions)
+        return fetch(getBaseUrl() + "api/authenticate", requestOptions)
         .then(handleResponse)
         .then(user => {
             console.log(user);
