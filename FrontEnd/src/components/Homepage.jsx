@@ -23,26 +23,6 @@ function Homepage(){
     React.useEffect(() => {
        fetchMyApi();
     }, [])
-  
-    // I needed this function because I wasnt using useEffect properly with async function but now I am so I can maybe delete this.
-    // function handleResponse(response) {
-    //     return response.text().then(text => {
-    //         const data = text && JSON.parse(text);
-    //         if (!response.ok) {
-    //             if (response.status === 401) {
-    //                 // auto logout if 401 response returned from api
-    //                 logout();
-    //                 location.reload(true);
-    //             }
-    
-    //             const error = (data && data.message) || response.statusText;
-    //             return Promise.reject(error);
-    //         }
-    //         console.log(response)
-    //         return data;
-           
-    //     });
-    // }
     async function getPeriodData(id){
         let requestOptions = {
             method: "GET",
@@ -78,11 +58,6 @@ function Homepage(){
    <button onClick={() => getPeriodData(k.periodID)}>View Homework For This Class</button>
     </div>
     )
-    // if(image){
-    //     return (
-    //     <img src={imageurl}></img>
-    //     )
-    // }
     if (!dataLoaded){
     return (
         <div>    
@@ -96,7 +71,6 @@ function Homepage(){
             <h1>{k.description}</h1>
             <h4>{k.dueDate}</h4>
             <Link to={`/homework/${k.periodHomeworkID}`}>Click</Link>
-            {/* <button onClick={() => getHomeworkData(3)}>View Image</button> */}
         </div>
         );
         return (
