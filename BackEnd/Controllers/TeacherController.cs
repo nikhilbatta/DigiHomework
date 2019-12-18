@@ -39,9 +39,6 @@ namespace BackEnd.Controllers
         [HttpPost("authenticate")]
         public ActionResult<User> Authenticate([FromBody] User userparam)
         {
-            // will use claims identity here to find the periods for that specific teacher.
-            Console.WriteLine(userparam.Username);
-            Console.WriteLine(userparam.Password);
             var user = _userService.Authenticate(userparam.Username, userparam.Password);
             return Ok(user);
         }
@@ -49,7 +46,7 @@ namespace BackEnd.Controllers
         [HttpGet("periods")]
         public ActionResult<IEnumerable<Period>> Get()
         {
-            // will use claims identity here to find the periods for that specific teacher.
+           
             var identity = (ClaimsIdentity)User.Identity;
             var foundId = identity.FindFirst(ClaimTypes.Name).Value;
             Teacher foundTeacher = _db.Teachers.FirstOrDefault(t => t.UserID == Convert.ToInt32(foundId));
@@ -58,8 +55,6 @@ namespace BackEnd.Controllers
         }
         [Authorize]
         [HttpGet("period/{id}")]
-        // pass period id in the url, only return homework for that specific period.
-        // return other information about the period like name subject teachername, etc.
         public ActionResult<IEnumerable<PeriodHomework>> GetAllHomeWorks(int id)
         {
             Period foundPeriod = _db.Periods.FirstOrDefault(p => p.PeriodID == id);
@@ -67,6 +62,12 @@ namespace BackEnd.Controllers
             return foundHomework;
         }
 
+        [HttpGet("periods/homework/{id}")]
+        public ActionResult <PeriodHomework> GetSpecificHomework(int id)
+        {
+            PeriodHomework foundHomework = _db.PeriodHomeworks.FirstOrDefault(ph => ph.PeriodHomeworkID == id);
+            return foundHomework;
+        }
 
         [HttpPost("period/{id}/homework")]
         public void CreateHWImage([FromForm] PeriodHomework hw, int id)
@@ -127,22 +128,34 @@ namespace BackEnd.Controllers
 
             fileTransfer.UploadAsync(uploadRequest);
         }
-        [HttpPost("sender")]
-        public void Send()
+        [HttpPost("period/{id}/homework/{hwID}")]
+        public void Send(int id, int hwID)
         {
+            List<PeriodStudents> foundStudentPeriod = _db.PeriodStudents.Where(p => p.PeriodID == id).ToList();
+          
+            foreach(PeriodStudents found1 in foundStudentPeriod)
+            {
+                List<Student> foundStudents = _db.Students.Where(s => s.StudentID == found1.StudentID).ToList();
+                foreach(Student found in foundStudents)
+            {
+                Console.WriteLine(found.PhoneNumber);
             const string accountSid = "";
             const string authToken = "";
             TwilioClient.Init(accountSid, authToken);
-            var mediaUrl = new[] {
-              new Uri("https://testerbuckettt.s3-us-west-2.amazonaws.com/HOMEWORK-3.jpeg")
-          }.ToList();
+        //     var mediaUrl = new[] {
+        //       new Uri("https://testerbuckettt.s3-us-west-2.amazonaws.com/HOMEWORK-{hwID}.jpeg")
+        //   }.ToList();
             var message = MessageResource.Create(
-                body: "Check if you can click that link and see that image.",
+                body: $"Check if you can click that link and see that image. http://localhost:8080/#/period/homework/student/{hwID}",
                 from: new Twilio.Types.PhoneNumber("+15025144572"),
-                mediaUrl: mediaUrl,
-                to: new Twilio.Types.PhoneNumber("+13609999430")
+                // mediaUrl: mediaUrl,
+                to: new Twilio.Types.PhoneNumber("+1" + found.PhoneNumber)
             );
-            Console.WriteLine(message.Sid);
+            }
+            }
+            
+            
+            // Console.WriteLine(message.Sid);
         }
         // public HttpResponseMessage GetHwImage(int id)
         // {

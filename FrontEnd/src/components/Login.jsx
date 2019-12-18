@@ -1,12 +1,12 @@
 import React, {useRef} from 'react'
 import getBaseUrl from './apiHelper'
 
-function Login(){
+function Login(props){
     var username = useRef("");
     var password = useRef("");
 
     function Authenticate(){
-       
+        console.log(props);
         let Username = username.current.value;
         let Password = password.current.value;
         console.log(Username + Password)
@@ -20,8 +20,11 @@ function Login(){
         .then(user => {
             console.log(user);
             localStorage.setItem('user', JSON.stringify(user.token))
+            let path = `/homepage`
+            props.history.push(path);
             return user;
         })
+        
     }
     function handleResponse(response) {
         return response.text().then(text => {

@@ -41,7 +41,7 @@ function CreateAndSend(){
             <input ref={date} type="date"></input>
             <button onClick={Creator}>Create</button>
             {/* only if the homework is created then it can only be sent */}
-            <button>Send</button>
+            {/* <button>Send</button> */}
         </div>
     )
 }
