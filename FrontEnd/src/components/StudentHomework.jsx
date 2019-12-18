@@ -82,7 +82,7 @@ class StudentHomework extends React.Component {
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
         }
         console.log(this.props.match.params.shID)
-        const test = await fetch(`${getBaseUrl()}api/periods/homework/${this.props.match.params.shID}`, requestOptions)
+        const test = await fetch(`${getBaseUrl()}api/sh/${this.props.match.params.shID}`, requestOptions)
         const test2 = await test.json()
         console.log(test2);
         this.setState({ hwData: test2 })
@@ -93,28 +93,44 @@ class StudentHomework extends React.Component {
         var styler = {
             margin: "40px"
         }
-    
+        
             console.log(Object.keys(this.state.hwData))
             return (
-                <div id="tester" style={styler}>
-                    {Object.keys(this.state.hwData).map(key =>  {
-                        if (key == "description" || key == "dueDate") {
-                            return <div>
-                                <h1>{key.toUpperCase()} </h1>
-                                
-                                <h2> {this.state.hwData[key]}</h2>
-                               
-                            </div>
-                            
-
-                        }
-                    },
-                    
-                    )}
-                    <input type="file"></input>
-                    
+                
+                <div>
+                    <label>Student Name: </label>
+                    {this.state.hwData.firstName}
+                    <br/>
+                    <label>Homework Class</label>
+                    <br/>
+                    <label>Homework Short Description: </label>
+                    {this.state.hwData.homeworkDescription}
+                    <br/>
+                    <img></img>
+                    <br/>
+                    <input type="file"></input> 
                 </div>
             )
+            // return (
+            //     <div id="tester" style={styler}>
+            //         {Object.keys(this.state.hwData).map(key =>  {
+            //             if (key == "description" || key == "dueDate") {
+            //                 return <div>
+            //                     <h1>{key.toUpperCase()} </h1>
+                                
+            //                     <h2> {this.state.hwData[key]}</h2>
+                               
+            //                 </div>
+                            
+
+            //             }
+            //         },
+                    
+            //         )}
+            //         <input type="file"></input>
+                    
+            //     </div>
+            // )
     }
 }
 export default StudentHomework;

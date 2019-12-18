@@ -10,6 +10,7 @@ namespace BackEnd.Models
     {
         public int PeriodHomeworkID {get;set;}
         public int PeriodID {get;set;}
+        public string Title {get;set;}
         public string Description {get;set;}
         public string AssignedDate{get;set;}
         public string DueDate{get;set;}

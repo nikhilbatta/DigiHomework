@@ -3,7 +3,8 @@ import getBaseUrl from './apiHelper';
 
 
 
-function CreateAndSend(){
+function CreateAndSend(props){
+    console.log(props.match.params.pID)
     var [fileupload,setfile] = useState('');
     let file = useRef('')
     let description = useRef('');
@@ -23,7 +24,7 @@ function CreateAndSend(){
             body: formData,
           };
           console.log(formData);
-        fetch(getBaseUrl() + `api/period/${id}/homework`, config)
+        fetch(getBaseUrl() + `api/period/${props.match.params.cID}/homework`, config)
           .then(response => 
             console.log(response))
             .then(data =>
@@ -34,14 +35,27 @@ function CreateAndSend(){
         console.log(e.target.files)
  
     }
+    var style = {
+        textAlign: "center"
+    }
     return (
-        <div>
-            <input ref={file} type="file" onChange={upload}></input>
-            <input ref={description} type="text"></input>
+        <div style={style}>
+        <b><h1>Create Homework For The Class</h1></b>
+            <label>Homework Name
+                <input type="text"></input>
+            </label>
+           
+            <br/>
+            <label>Description </label>
+            <textarea ref={description}></textarea>
+            <br/>
+            <label>Due Date</label>
             <input ref={date} type="date"></input>
+            <br/>
+            <label>Upload Homework Image</label>
+            <input ref={file} type="file" onChange={upload}></input>
+            <br/>
             <button onClick={Creator}>Create</button>
-            {/* only if the homework is created then it can only be sent */}
-            {/* <button>Send</button> */}
         </div>
     )
 }

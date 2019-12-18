@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "7a88fb38ee26b3d74ed07d93531163bd1e64b0e3"
+    "signature": "99753d386e9b59dd2274dce481eb5e578d1717af"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v2.2": {
       "BackEnd/1.0.0": {
         "dependencies": {
+          "AWSSDK.Core": "3.3.104.4",
           "AWSSDK.Extensions.NETCore.Setup": "3.3.100.1",
           "AWSSDK.S3": "3.3.109",
           "Microsoft.AspNetCore.All": "2.2.0",
@@ -32,7 +33,8 @@
           "Microsoft.AspNetCore.Server.Kestrel": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "MySqlConnector": "0.60.2",
-          "Pomelo.EntityFrameworkCore.MySql": "2.2.6"
+          "Pomelo.EntityFrameworkCore.MySql": "2.2.6",
+          "Twilio": "5.37.0"
         },
         "runtime": {
           "BackEnd.dll": {}
@@ -41,11 +43,11 @@
           "BackEnd.dll": {}
         }
       },
-      "AWSSDK.Core/3.3.104": {
+      "AWSSDK.Core/3.3.104.4": {
         "runtime": {
           "lib/netstandard2.0/AWSSDK.Core.dll": {
             "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.3.104.0"
+            "fileVersion": "3.3.104.4"
           }
         },
         "compile": {
@@ -54,7 +56,7 @@
       },
       "AWSSDK.Extensions.NETCore.Setup/3.3.100.1": {
         "dependencies": {
-          "AWSSDK.Core": "3.3.104",
+          "AWSSDK.Core": "3.3.104.4",
           "Microsoft.Extensions.Configuration.Abstractions": "2.2.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
           "Microsoft.Extensions.Logging.Abstractions": "2.2.0"
@@ -71,7 +73,7 @@
       },
       "AWSSDK.S3/3.3.109": {
         "dependencies": {
-          "AWSSDK.Core": "3.3.104"
+          "AWSSDK.Core": "3.3.104.4"
         },
         "runtime": {
           "lib/netstandard2.0/AWSSDK.S3.dll": {
@@ -373,6 +375,23 @@
           "System.Reflection.Extensions": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0"
+        }
+      },
+      "Twilio/5.37.0": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.3.0",
+          "Newtonsoft.Json": "11.0.2",
+          "System.Collections.Specialized": "4.3.0",
+          "System.IdentityModel.Tokens.Jwt": "5.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Twilio.dll": {
+            "assemblyVersion": "5.37.0.0",
+            "fileVersion": "5.37.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Twilio.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -4048,12 +4067,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AWSSDK.Core/3.3.104": {
+    "AWSSDK.Core/3.3.104.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1ldqyzqh18tKTFuseBX3YetZk/flCE3fRVOBAUFpJJrt0xqHjMBxMwpMLrnrYaDubHj7f9EPU0TlGgMef1YUSA==",
-      "path": "awssdk.core/3.3.104",
-      "hashPath": "awssdk.core.3.3.104.nupkg.sha512"
+      "sha512": "sha512-KAJOA3HiMc81WvIiYg/h3CfF2F1C7iWNK0VwMfuKbTmJtR4+B68m5PCXCzClSjEWljpl895o7DR9bGfioP/hGw==",
+      "path": "awssdk.core/3.3.104.4",
+      "hashPath": "awssdk.core.3.3.104.4.nupkg.sha512"
     },
     "AWSSDK.Extensions.NETCore.Setup/3.3.100.1": {
       "type": "package",
@@ -4152,6 +4171,13 @@
       "sha512": "sha512-lg+vSS2NW3mxvmP4Iv1pVOT4WNWuDzX9vfvWcK6c8XLMv74Q6rA063eLhb4/lfxqp6M3IlsAxv7fmYtL91QNGQ==",
       "path": "system.linq.queryable/4.0.1",
       "hashPath": "system.linq.queryable.4.0.1.nupkg.sha512"
+    },
+    "Twilio/5.37.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bkXxLO6usORUTJf1j2AMSTv2cW/IgoWKWa9jMbsFbxN3GQ8gJsrK4j39GVhbO14A1+K+riSLL0+RRnvCCZpLdQ==",
+      "path": "twilio/5.37.0",
+      "hashPath": "twilio.5.37.0.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",

@@ -75,13 +75,15 @@ namespace BackEnd.Controllers
             Console.WriteLine(hw.HWImage.FileName);
 
             hw.PeriodID = id;
+            hw.ImageId = "https://testerbuckettt.s3-us-west-2.amazonaws.com/" + "HOMEWORK-" + hw.PeriodHomeworkID + ".jpeg";
             _db.PeriodHomeworks.Add(hw);
             _db.SaveChanges();
-            SaveFileToAWS("HOMEWORK-" + hw.PeriodHomeworkID + ".jpeg", hw.HWImage);
+            SaveFileToAWS(hw.ImageId, hw.HWImage);
         }
         [HttpGet("period/homework/{id}/image")]
         public async Task GetObjectFromS3Async(int id)
         {
+            // PeriodHomework foundHomework 
             var client = new AmazonS3Client("", "", Amazon.RegionEndpoint.USWest2);
             string keyName = "HOMEWORK-" + id + ".jpeg";
             var request = new GetObjectRequest 
@@ -129,6 +131,7 @@ namespace BackEnd.Controllers
             fileTransfer.UploadAsync(uploadRequest);
         }
         [HttpPost("period/{id}/homework/{hwID}")]
+        // hwID is actually periodHomeworkID
         public void Send(int id, int hwID)
         {
             List<PeriodStudents> foundStudentPeriod = _db.PeriodStudents.Where(p => p.PeriodID == id).ToList();
@@ -138,6 +141,15 @@ namespace BackEnd.Controllers
                 List<Student> foundStudents = _db.Students.Where(s => s.StudentID == found1.StudentID).ToList();
                 foreach(Student found in foundStudents)
             {
+                StudentPeriodHw newSPHomework = new StudentPeriodHw();
+                newSPHomework.StudentID = found.StudentID;
+                newSPHomework.PeriodHwID = hwID;
+                _db.StudentPeriodHw.Add(newSPHomework);
+                 _db.SaveChanges();
+                newSPHomework.Shortcode = newSPHomework.StudentPeriodHwId.ToString() + found.FirstName[0] + found.LastName[0];
+                _db.Entry(newSPHomework).State = EntityState.Modified;
+                _db.SaveChanges();
+                
                 Console.WriteLine(found.PhoneNumber);
             const string accountSid = "";
             const string authToken = "";
@@ -146,7 +158,7 @@ namespace BackEnd.Controllers
         //       new Uri("https://testerbuckettt.s3-us-west-2.amazonaws.com/HOMEWORK-{hwID}.jpeg")
         //   }.ToList();
             var message = MessageResource.Create(
-                body: $"Check if you can click that link and see that image. http://localhost:8080/#/period/homework/student/{hwID}",
+                body: $"Testing more and youre in the class so youre receiving it ;). http://localhost:8080/#/period/homework/student/{newSPHomework.Shortcode}/",
                 from: new Twilio.Types.PhoneNumber("+15025144572"),
                 // mediaUrl: mediaUrl,
                 to: new Twilio.Types.PhoneNumber("+1" + found.PhoneNumber)
@@ -156,6 +168,25 @@ namespace BackEnd.Controllers
             
             
             // Console.WriteLine(message.Sid);
+        }
+        [HttpGet("sh/{shortcode}")]
+        public ActionResult <StudentHomeworkResponse> GetStudentHomeworkData(string shortcode)
+        {
+            Console.WriteLine(shortcode);
+            StudentPeriodHw foundStudentHomework = _db.StudentPeriodHw.FirstOrDefault(p => p.Shortcode == shortcode);
+            Student foundStudent = _db.Students.FirstOrDefault(s => s.StudentID == foundStudentHomework.StudentID);
+            PeriodHomework foundPeriodHomework = _db.PeriodHomeworks.FirstOrDefault(ph => ph.PeriodHomeworkID == foundStudentHomework.PeriodHwID);
+            var shr = new StudentHomeworkResponse();
+            shr.StudentID = foundStudent.StudentID;
+            shr.FirstName = foundStudent.FirstName;
+            shr.LastName = foundStudent.LastName;
+            shr.HomeworkDescription = foundPeriodHomework.Description;
+            shr.HomeworkTitle = foundPeriodHomework.Title;
+            shr.AssignedDate = foundPeriodHomework.AssignedDate;
+            shr.DueDate = foundPeriodHomework.DueDate;
+            
+            return shr;
+
         }
         // public HttpResponseMessage GetHwImage(int id)
         // {

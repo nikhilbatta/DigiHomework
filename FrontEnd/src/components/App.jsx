@@ -17,10 +17,10 @@ class App extends React.Component{
                 <Switch>
                 <Route exact path ='/' component={Login}/>
                 <Route exact path ='/homepage' component={Homepage} />
-                <Route exact path = '/create' component={CreateAndSend} />
-                <Route exact path = '/period/homework/:hwID' component={Homework}/>
+                <Route exact path = '/create/:pID' component={CreateAndSend} />
+                <Route exact path = '/period/homework/:pID' component={Homework}/>
                 <Route exact path = '/period/homework/image/:imgId' component={HomeworkImage} />
-                <Route exact path = '/period/homework/student/:shID' component={StudentHomework}/>
+                <Route exact path = '/sh/:shID' component={StudentHomework}/>
                 </Switch>
             </div>
         )
