@@ -1,5 +1,6 @@
 import React, {useRef} from 'react'
 import getBaseUrl from './apiHelper'
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 function Login(props){
     var username = useRef("");
@@ -20,9 +21,15 @@ function Login(props){
         .then(user => {
             console.log(user);
             localStorage.setItem('user', JSON.stringify(user.token))
-            let path = `/homepage`
+            if(user){
+                let path = `/homepage`
             props.history.push(path);
             return user;
+            }
+            else{
+                alert("error")
+            }
+            
         })
         
     }
@@ -44,12 +51,57 @@ function Login(props){
            
         });
     }
+    var firstDivStyle = {
+        textAlign: "center"
+    }
+    var divstyle = {
+        width: '65%',
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: '50px'
+    }
+    var formStyle = {
+        margin: "0 auto",
+        maxWidth: "320px"
+    }
+    // var inputStyle = {
+    //     height: "50px",
+    //     width: "120px"
+    // }
+    var btnStyle = {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '10px',
+    marginBottom: '10px'
+  };
+    
     return (
-        <div>
-            <h2>Welcome To DigiHomework</h2>
-            <input ref={username} type="text" defaultValue="Username"></input>
-            <input ref={password} type="text" defaultValue="Password"></input>
-            <button onClick={Authenticate}>Sign In</button>
+        
+        <div style={firstDivStyle}>
+            <header>Welcome To DigiHomework</header>
+            <div style={divstyle}>
+                <form onSubmit={Authenticate} style={formStyle}>
+                {/* <FormGroup>
+                    <ControlLabel>Username</ControlLabel>
+                </FormGroup> */}
+                <label>Username </label>
+                <FormGroup>
+                
+                <FormControl  size="50" ref={username} type="text"/>
+                </FormGroup>
+                <br/>
+                <label>Password</label>
+                <FormGroup>
+                <FormControl ref={password} type="password"/>
+                </FormGroup>
+                <br/>
+                <button style={btnStyle} type="submit" class="waves-effect waves-light btn"><i className="material-icons left">cloud</i>Login</button>
+               
+                </form>
+            
+            </div>
         </div>
     )
 }

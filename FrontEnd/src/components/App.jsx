@@ -6,6 +6,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import CreateAndSend from './CreateAndSend';
 import Homework from './Homework';
 import StudentHomework from './StudentHomework';
+import LandingPage from './LandingPage';
 
 class App extends React.Component{
     constructor(props){
@@ -15,7 +16,8 @@ class App extends React.Component{
         return (
             <div>
                 <Switch>
-                <Route exact path ='/' component={Login}/>
+                <Route exact path ='/' component={LandingPage}/>
+                <Route exact path = '/login' component={Login}/>
                 <Route exact path ='/homepage' component={Homepage} />
                 <Route exact path = '/create/:pID' component={CreateAndSend} />
                 <Route exact path = '/period/homework/:pID' component={Homework}/>
