@@ -40,17 +40,48 @@ function Homepage(props) {
     //     console.log(setter);
 
     // }
+    var divStyle = {
+        width: '65%',
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: '50px',
+        
+       
+    }
+    var btnStyle = {
+        backgroundColor: 'grey',
+        color: 'black',
+        marginLeft: '5px',
+        marginRight: '5px',
+        marginTop: '10px',
+        marginBottom: '10px'
+      };
+      var innerDiv = {
+          flexWrap: "flex",
+          textAlign: "center",
+          backgroundColor: 'grey'
+      }
+      var h4Style = {
+          textAlign: "center"
+      }
     const periodDataV = periodData.map((k, index) =>
-        <div>
-            <h1>{k.name}</h1>
-            <h4>{k.subject}</h4>
-            <button onClick={() => movePage(k.periodID)}>View Homework For This Class</button>
-        </div>
+            <div style={innerDiv}>
+             <li className="collection-item">
+            <h3>{k.subject}</h3>
+            <button style={btnStyle} onClick={() => movePage(k.periodID)} type="submit" className="waves-effect waves-light btn"><i className="material-icons left">view_list</i>View Homework</button>
+             </li>
+           
+            
+             </div>
     )
     if (!dataLoaded) {
         return (
-            <div>
+            <div style={divStyle}> 
+                 <ul className="collection with-header">
+                 <li className="collection-header"><h4 style={h4Style}>Your Classes</h4></li>
                 {periodDataV}
+                </ul>
             </div>
         )
     }

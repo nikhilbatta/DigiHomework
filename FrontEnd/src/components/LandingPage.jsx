@@ -95,7 +95,7 @@ header:after {
   <section className="header-content">
   
     <img className="rocky-dashed animate-pop-in" src="https://s3.amazonaws.com/home.kidblog.org/home/wp-content/uploads/blogging-homework-2-640x427.jpg"/>
-    <h1 className="header-title animate-pop-in">Welcome To DigiHomework</h1>
+    <h1 className="header-title animate-pop-in">DigiHomework</h1>
     <h3 className="header-subtitle animate-pop-in">A useful way to track homework</h3>
     <h2 className="header-button animate-pop-in"><a href="/#/login" class="button">Login</a></h2>
   

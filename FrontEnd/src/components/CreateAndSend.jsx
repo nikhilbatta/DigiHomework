@@ -40,22 +40,28 @@ function CreateAndSend(props){
     }
     return (
         <div style={style}>
-        <b><h1>Create Homework For The Class</h1></b>
+        <b><h3>New Homework</h3></b>
             <label>Homework Name
                 <input type="text"></input>
             </label>
            
             <br/>
             <label>Description </label>
-            <textarea ref={description}></textarea>
+            <textarea className="materialize-textarea" ref={description}></textarea>
             <br/>
             <label>Due Date</label>
             <input ref={date} type="date"></input>
             <br/>
             <label>Upload Homework Image</label>
+            <div className="file-path-wrapper">
+         
             <input ref={file} type="file" onChange={upload}></input>
+            <input className="file-path validate" type="text"/>
+            </div>
+        
+            
             <br/>
-            <button onClick={Creator}>Create</button>
+            <button className="waves-effect waves-light btn" onClick={Creator}>Create</button>
         </div>
     )
 }

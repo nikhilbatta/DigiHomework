@@ -61,6 +61,17 @@ namespace BackEnd.Controllers
             List<PeriodHomework> foundHomework = _db.PeriodHomeworks.Where(ph => ph.PeriodID == foundPeriod.PeriodID).ToList();
             return foundHomework;
         }
+        [Authorize]
+        [HttpGet("period/info/{id}")]
+        public ActionResult<HomeworkTeacherPeriod> GetPeriodAndTeacherInfo(int id){
+            Period foundPeriod = _db.Periods.FirstOrDefault(p => p.PeriodID == id);
+            Teacher foundTeacher = _db.Teachers.FirstOrDefault(p => p.TeacherID == foundPeriod.TeacherID);
+            var newInfo = new HomeworkTeacherPeriod();
+            newInfo.TeacherName = foundTeacher.FirstName;
+            newInfo.ClassName = foundPeriod.Name;
+            return newInfo;
+            
+        }   
 
         [HttpGet("periods/homework/{id}")]
         public ActionResult <PeriodHomework> GetSpecificHomework(int id)

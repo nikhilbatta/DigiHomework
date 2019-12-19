@@ -80,7 +80,7 @@ function Login(props){
     return (
         
         <div style={firstDivStyle}>
-            <header>Welcome To DigiHomework</header>
+            <header>Login</header>
             <div style={divstyle}>
                 <form onSubmit={Authenticate} style={formStyle}>
                 {/* <FormGroup>

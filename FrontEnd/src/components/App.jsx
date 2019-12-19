@@ -7,6 +7,7 @@ import CreateAndSend from './CreateAndSend';
 import Homework from './Homework';
 import StudentHomework from './StudentHomework';
 import LandingPage from './LandingPage';
+import LetsSee from './NavBar';
 
 class App extends React.Component{
     constructor(props){
@@ -15,7 +16,9 @@ class App extends React.Component{
     render(){
         return (
             <div>
+                <LetsSee/>
                 <Switch>
+                    
                 <Route exact path ='/' component={LandingPage}/>
                 <Route exact path = '/login' component={Login}/>
                 <Route exact path ='/homepage' component={Homepage} />
