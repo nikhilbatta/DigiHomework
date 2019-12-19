@@ -5,7 +5,7 @@ function LandingPage(props){
         // href="/#/login"
         console.log(props)
         console.log(localStorage.getItem('user'))
-        if(localStorage.getItem !== null){
+        if(localStorage.getItem('user') !== "null"){
             let newpath = "/homepage"
             props.history.push(newpath)
         }
