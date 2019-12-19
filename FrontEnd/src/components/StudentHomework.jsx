@@ -90,21 +90,21 @@ class StudentHomework extends React.Component {
     }
  
     render() {
-        var styler = {
-            margin: "40px"
+        var divstyle = {
+            width: '65%',
+            display: 'block',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            marginTop: '80px'
         }
         
             console.log(Object.keys(this.state.hwData))
             return (
                 
-                <div>
-                    <label>Student Name: </label>
-                    {this.state.hwData.firstName}
+                <div style={divstyle}>
+                    Student Name:  {this.state.hwData.firstName}
                     <br/>
-                    <label>Homework Class</label>
-                    <br/>
-                    <label>Homework Short Description: </label>
-                    {this.state.hwData.homeworkDescription}
+                    Homework Description:  {this.state.hwData.homeworkDescription}
                     <br/>
                     <img src={this.state.hwData.imageID}></img>
                     <br/>
