@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import getBaseUrl from './apiHelper'
-
+import Spinner from 'react-bootstrap/Spinner'
 function Homework(props) {
     console.log(props);
     let [homeworkData, setHomeworkData] = useState([]);
@@ -28,12 +28,7 @@ function Homework(props) {
         setHomeworkData(responseData);
         console.log(responseData);
         console.log(id)
-        if(responseData.length !== 0 ){
-        await getClassData(responseData[0].periodID)
-        }
-        else{
-            alert("there are no homeworks for this period")
-        }
+        await getClassData(id)
 
     }
     React.useEffect(() => {
@@ -58,18 +53,6 @@ function Homework(props) {
         let data = await apiCall.json();
         console.log(data);
     }
-    const homeworkDataApiData = homeworkData.map((k, index) =>
-        <tr>
-            <td>{k.title}</td>
-            <td>{k.dueDate}</td>
-            <td>{k.description}</td>
-            <td>{k.assignedDate}</td>
-            <td><button className="waves-effect waves-light btn" onClick={() => viewImage(k.periodHomeworkID)}>View homework</button>
-                <button className="waves-effect waves-light btn" onClick={() => sendHomework(k.periodID, k.periodHomeworkID)}> Send Homework To Students</button>
-
-            </td>
-        </tr>
-    )
     var btnStyle = {
         backgroundColor: 'black',
         color: 'black',
@@ -79,14 +62,28 @@ function Homework(props) {
         marginBottom: '10px',
         color: "white"
     };
-   
+    const homeworkDataApiData = homeworkData.map((k, index) =>
+        <tr>
+            <td>{k.title}</td>
+            <td>{k.dueDate}</td>
+            <td>{k.description}</td>
+            <td>{k.assignedDate}</td>
+            <td><button style={btnStyle} className="waves-effect waves-light btn" onClick={() => viewImage(k.periodHomeworkID)}>View homework</button>
+                <br />
+                <button style={btnStyle} className="waves-effect waves-light btn" onClick={() => sendHomework(k.periodID, k.periodHomeworkID)}> Send Homework</button>
+
+            </td>
+        </tr>
+    )
+
+
     console.log(teacherData)
     if (teacherData.length !== 0) {
         return (
             <div>
 
-                <h1>{teacherData.teacherName}</h1>
-                <h2>{teacherData.className}</h2>
+                <h3>Teacher Name: {teacherData.teacherName}</h3><h3> Class: {teacherData.className}</h3>
+
                 <button style={btnStyle} className="waves-effect waves-light btn" onClick={() => newHomework(props.match.params.pID)}>Create New Homework for this period</button>
                 <table>
                     <tr>
@@ -102,13 +99,12 @@ function Homework(props) {
             </div>
         )
     }
-    return (
-        <div>
-
-            <p>loading</p>
-
-        </div>
-    )
+    else{
+        return (
+            <div>
+            </div>
+        )
+        }
 
 }
 export default Homework;

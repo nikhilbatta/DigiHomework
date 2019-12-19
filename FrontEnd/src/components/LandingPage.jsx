@@ -1,5 +1,19 @@
 import React from 'react'
-function LandingPage(){
+function LandingPage(props){
+    function handleClick(){
+        console.log("it got here")
+        // href="/#/login"
+        console.log(props)
+        console.log(localStorage.getItem('user'))
+        if(localStorage.getItem !== null){
+            let newpath = "/homepage"
+            props.history.push(newpath)
+        }
+        else{
+            let newpath = "/login"
+            props.history.push(newpath)
+        }
+    }
     return (
         <div>
             <style jsx>{`header {
@@ -97,7 +111,7 @@ header:after {
     <img className="rocky-dashed animate-pop-in" src="https://s3.amazonaws.com/home.kidblog.org/home/wp-content/uploads/blogging-homework-2-640x427.jpg"/>
     <h1 className="header-title animate-pop-in">DigiHomework</h1>
     <h3 className="header-subtitle animate-pop-in">A useful way to track homework</h3>
-    <h2 className="header-button animate-pop-in"><a href="/#/login" class="button">Login</a></h2>
+    <h2 className="header-button animate-pop-in"><a onClick={handleClick}  class="button">Login</a></h2>
   
     </section>
     </header>

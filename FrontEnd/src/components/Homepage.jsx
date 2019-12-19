@@ -50,8 +50,8 @@ function Homepage(props) {
        
     }
     var btnStyle = {
-        backgroundColor: 'grey',
-        color: 'black',
+        backgroundColor: 'black',
+        color: 'white',
         marginLeft: '5px',
         marginRight: '5px',
         marginTop: '10px',

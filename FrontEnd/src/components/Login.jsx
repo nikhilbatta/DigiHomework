@@ -6,7 +6,8 @@ function Login(props){
     var username = useRef("");
     var password = useRef("");
 
-    function Authenticate(){
+    async function Authenticate(e){
+        event.preventDefault();
         console.log(props);
         let Username = username.current.value;
         let Password = password.current.value;
@@ -16,7 +17,7 @@ function Login(props){
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({Username, Password})
         };
-        return fetch(getBaseUrl() + "api/authenticate", requestOptions)
+        return await fetch(getBaseUrl() + "api/authenticate", requestOptions)
         .then(handleResponse)
         .then(user => {
             console.log(user);
@@ -59,7 +60,7 @@ function Login(props){
         display: 'block',
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: '50px'
+        marginTop: '80px'
     }
     var formStyle = {
         margin: "0 auto",
@@ -70,17 +71,18 @@ function Login(props){
     //     width: "120px"
     // }
     var btnStyle = {
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: '10px',
-    marginBottom: '10px'
+        backgroundColor: 'black',
+        color: 'white',
+        marginLeft: '5px',
+        marginRight: '5px',
+        marginTop: '10px',
+        marginBottom: '10px'
   };
     
     return (
         
         <div style={firstDivStyle}>
-            <header>Login</header>
+         
             <div style={divstyle}>
                 <form onSubmit={Authenticate} style={formStyle}>
                 {/* <FormGroup>

@@ -9,12 +9,14 @@ function CreateAndSend(props){
     let file = useRef('')
     let description = useRef('');
     let date = useRef('');
+    let title = useRef('');
     function Creator(){
         console.log(fileupload);
         console.log(date.current.value)
         const formData = new FormData();
         formData.append('HWImage', fileupload);
         formData.append('Description', description.current.value);
+        formData.append("Title", title.current.value);
         formData.append("DueDate", date.current.value);
         let id = 1;
         const config = {
@@ -24,7 +26,7 @@ function CreateAndSend(props){
             body: formData,
           };
           console.log(formData);
-        fetch(getBaseUrl() + `api/period/${props.match.params.cID}/homework`, config)
+        fetch(getBaseUrl() + `api/period/${props.match.params.pID}/homework`, config)
           .then(response => 
             console.log(response))
             .then(data =>
@@ -38,11 +40,20 @@ function CreateAndSend(props){
     var style = {
         textAlign: "center"
     }
+    var buttonStyle = {
+        backgroundColor: 'black',
+        color: 'black',
+        marginLeft: '5px',
+        marginRight: '5px',
+        marginTop: '10px',
+        marginBottom: '10px',
+        color: "white"
+    }
     return (
         <div style={style}>
         <b><h3>New Homework</h3></b>
             <label>Homework Name
-                <input type="text"></input>
+                <input ref={title}type="text"></input>
             </label>
            
             <br/>
@@ -61,7 +72,7 @@ function CreateAndSend(props){
         
             
             <br/>
-            <button className="waves-effect waves-light btn" onClick={Creator}>Create</button>
+            <button style={buttonStyle} className="waves-effect waves-light btn" onClick={Creator}>Create</button>
         </div>
     )
 }

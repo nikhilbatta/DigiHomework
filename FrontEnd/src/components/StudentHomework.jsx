@@ -106,8 +106,9 @@ class StudentHomework extends React.Component {
                     <label>Homework Short Description: </label>
                     {this.state.hwData.homeworkDescription}
                     <br/>
-                    <img></img>
+                    <img src={this.state.hwData.imageID}></img>
                     <br/>
+                    <label>Functionality for submitting homework for student COMING SOON!</label>
                     <input type="file"></input> 
                 </div>
             )

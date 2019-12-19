@@ -8,6 +8,7 @@ import Homework from './Homework';
 import StudentHomework from './StudentHomework';
 import LandingPage from './LandingPage';
 import LetsSee from './NavBar';
+import SideNav from './SideNav';
 
 class App extends React.Component{
     constructor(props){
@@ -17,6 +18,7 @@ class App extends React.Component{
         return (
             <div>
                 <LetsSee/>
+               
                 <Switch>
                     
                 <Route exact path ='/' component={LandingPage}/>

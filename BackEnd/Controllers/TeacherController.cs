@@ -84,12 +84,15 @@ namespace BackEnd.Controllers
         public void CreateHWImage([FromForm] PeriodHomework hw, int id)
         {
             Console.WriteLine(hw.HWImage.FileName);
-
+            
             hw.PeriodID = id;
-            hw.ImageId = "https://testerbuckettt.s3-us-west-2.amazonaws.com/" + "HOMEWORK-" + hw.PeriodHomeworkID + ".jpeg";
+            // hw.ImageId = "https://testerbuckettt.s3-us-west-2.amazonaws.com/";
+            hw.AssignedDate = DateTime.Today.ToString();
             _db.PeriodHomeworks.Add(hw);
             _db.SaveChanges();
-            SaveFileToAWS(hw.ImageId, hw.HWImage);
+            var imageID = "HOMEWORK-" + hw.PeriodHomeworkID + ".jpeg";
+            
+            SaveFileToAWS(imageID, hw.HWImage);
         }
         [HttpGet("period/homework/{id}/image")]
         public async Task GetObjectFromS3Async(int id)
@@ -195,7 +198,7 @@ namespace BackEnd.Controllers
             shr.HomeworkTitle = foundPeriodHomework.Title;
             shr.AssignedDate = foundPeriodHomework.AssignedDate;
             shr.DueDate = foundPeriodHomework.DueDate;
-            
+            shr.ImageID = "https://testerbuckettt.s3-us-west-2.amazonaws.com/" + "HOMEWORK-" + foundPeriodHomework.PeriodHomeworkID + ".jpeg";
             return shr;
 
         }
