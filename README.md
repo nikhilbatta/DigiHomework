@@ -13,7 +13,7 @@ _DigiHomework, keep track of homework, grade homework, lets students submit home
 
 * _Clone project from this repositiory by typing git clone and then the repo URL_
 * _go to the front end directory npm install, this will install all the packages that are needed that are in the package.json file_
-* _go to the backend directory and run dotnet run, have fun, this wont be needed after all deployment is finished, which will be soon. 
+* _go to the backend directory and run dotnet run, have fun, this wont be needed after all deployment is finished, which will be soon_ 
 * _To run project go to the frontend directory of the project and type in npm start in the terminal_
 
 ## Specs
